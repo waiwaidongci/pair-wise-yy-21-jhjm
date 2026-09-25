@@ -8,7 +8,8 @@ export const createDefaultRepairTicket = (overrides: Partial<RepairTicket> = {})
   priority: "priority 1" as never,
   status: "ASSIGNED" as never,
   assigned_at: "2026-06-11T09:00:00Z" as never,
-  restored_at: "2026-06-11T09:00:00Z" as never,
+  restored_at: null as never,
+  crew_release_result: null as never,
   ...overrides
 });
 

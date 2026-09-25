@@ -8,7 +8,9 @@ export const createDefaultSparePartUsage = (overrides: Partial<SparePartUsage> =
   quantity: 92 as never,
   warehouse_name: "warehouse name 1" as never,
   approved_by: "approved by 1" as never,
-  usage_status: "ASSIGNED" as never,
+  usage_status: "PENDING" as never,
+  actual_quantity: null as never,
+  adjust_note: null as never,
   ...overrides
 });
 

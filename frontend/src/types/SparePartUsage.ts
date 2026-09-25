@@ -7,4 +7,6 @@ export interface SparePartUsage {
   warehouse_name: string;
   approved_by: string;
   usage_status: string;
+  actual_quantity: number | null;
+  adjust_note: string | null;
 }

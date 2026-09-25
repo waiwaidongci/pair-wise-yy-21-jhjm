@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS repair_ticket (
   priority TEXT,
   status TEXT,
   assigned_at TEXT,
-  restored_at TEXT
+  restored_at TEXT,
+  crew_release_result TEXT
 );
 
 CREATE TABLE IF NOT EXISTS crew (
@@ -50,7 +51,9 @@ CREATE TABLE IF NOT EXISTS spare_part_usage (
   quantity TEXT,
   warehouse_name TEXT,
   approved_by TEXT,
-  usage_status TEXT
+  usage_status TEXT,
+  actual_quantity TEXT,
+  adjust_note TEXT
 );
 
 CREATE TABLE IF NOT EXISTS audit_log (

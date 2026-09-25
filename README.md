@@ -55,8 +55,18 @@ backend/src/routes, controllers, services, models, repositories, middlewares, co
 ## 枚举/常量出现位置清单
 
 - FaultType: constants/FaultType、types/FaultType、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
-- TicketStatus: constants/TicketStatus、types/TicketStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- TicketStatus: constants/TicketStatus、types/TicketStatus、constructors、logTemplates、errorMessages、筛选器（待复电/已复电）、展示组件/控制器均有引用。
 - AssetHealthStatus: constants/AssetHealthStatus、types/AssetHealthStatus、constructors、logTemplates、errorMessages、筛选器、展示组件/控制器均有引用。
+- SparePartUsageStatus（PENDING/APPROVED/REJECTED/CONSUMED/POST_RESTORE_ADJUST）: 前后端 constants/SparePartUsageStatus、statusText、utils/formatters、复电核对与补记逻辑、备件异常筛选器、TicketsPage 展示均有引用。
+- CrewDutyStatus（AVAILABLE/BUSY/OFF_DUTY）与 CrewReleaseResult（RELEASED/NOT_RELEASED）: 前后端 constants/CrewDutyStatus、statusText、utils/formatters、CrewCard、班组释放逻辑均有引用。
+
+## 复电交接台（/tickets）
+
+- 确认复电前逐笔核对该工单的备件申请：申请被退回（REJECTED）或申请量与实际用量不一致时不能确认，页面和接口都会列出具体备件。
+- 确认成功后保存复电时间（restored_at）、备件实耗（actual_quantity + CONSUMED）和班组释放结果（crew_release_result=RELEASED），班组 current_ticket_id 清空并回到 AVAILABLE 可派状态。
+- 班组记录中挂的不是这张工单（crew.current_ticket_id ≠ ticket.id）时，确认不生效（CREW_TICKET_MISMATCH）。
+- 已复电工单只能补记备件调整说明（POST_RESTORE_ADJUST，adjust_note 必填），不能改回未复电（TICKET_ALREADY_RESTORED）。
+- 记录保存在后端，关闭页面再打开仍会重新加载；列表支持待复电、备件异常、已复电筛选。
 
 ## 为什么会牵一发动全身
 
