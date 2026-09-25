@@ -48,9 +48,23 @@ CREATE TABLE IF NOT EXISTS spare_part_usage (
   part_code TEXT,
   part_name TEXT,
   quantity TEXT,
+  actual_quantity TEXT,
   warehouse_name TEXT,
   approved_by TEXT,
-  usage_status TEXT
+  usage_status TEXT,
+  adjust_note TEXT
+);
+
+CREATE TABLE IF NOT EXISTS restoration_handover (
+  id INTEGER PRIMARY KEY,
+  ticket_id TEXT,
+  restored_at TEXT,
+  operator TEXT,
+  parts_json TEXT,
+  crew_id TEXT,
+  crew_name TEXT,
+  crew_released TEXT,
+  released_at TEXT
 );
 
 CREATE TABLE IF NOT EXISTS audit_log (
